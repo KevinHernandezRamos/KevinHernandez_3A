@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shelby Motors</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        :root {
+            --primario: #e63946;
+            --oscuro: #1d3557;
+            --claro: #f1faee;
+            --acento: #457b9d;
+            --destacado: #a8dadc;
+            --rojo-ferrari: #ff2800;
+            --azul-shelby: #0056b3;
+        }
+
+        body {
+            background-color: black;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        
+        header {
+            background: linear-gradient(rgba(29, 53, 87, 0.9), rgba(29, 53, 87, 0.9)), 
+                        url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrD4lelqOARusHfd49tz38f8nfyb3AZzlovg&s');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .contenido-cabecera {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+            animation: aparecer 1.5s ease-in-out;
+        }
+
+        @keyframes aparecer {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 700;
+        }
+
+        .eslogan {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .boton {
+            display: inline-block;
+            background: var(--primario);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .boton:hover {
+            background: #c1121f;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(29, 53, 87, 0.9);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        nav.desplazado {
+            background-color: var(--oscuro);
+            padding: 0.5rem 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .contenedor-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+        }
+
+        .enlaces-nav {
+            display: flex;
+            list-style: none;
+        }
+
+        .enlaces-nav li {
+            margin-left: 2rem;
+        }
+
+        .enlaces-nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .enlaces-nav a:hover {
+            color: var(--primario);
+        }
+
+        .enlaces-nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--primario);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        .enlaces-nav a:hover::after {
+            width: 100%;
+        }
+
+        
+        .seccion-modelos {
+            padding: 5rem 0;
+            background-color: white;
+        }
+
+        .titulo-seccion {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .titulo-seccion h2 {
+            font-size: 2.5rem;
+            color: var(--oscuro);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .titulo-seccion h2::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            background: var(--primario);
+            bottom: -10px;
+            left: 25%;
+        }
+
+        .titulo-seccion p {
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .contenedor-marca {
+            margin-bottom: 4rem;
+        }
+
+        .titulo-marca {
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .titulo-marca h3 {
+            font-size: 2rem;
+            color: var(--oscuro);
+            display: inline-block;
+            background: white;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .titulo-marca.ferrari h3 {
+            color: var(--rojo-ferrari);
+        }
+
+        .titulo-marca.shelby h3 {
+            color: var(--azul-shelby);
+        }
+
+        .titulo-marca::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            background: #ddd;
+            top: 50%;
+            left: 0;
+            z-index: 0;
+        }
+
+        .grid-modelos {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            padding: 0 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .tarjeta-auto {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .tarjeta-auto:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .imagen-auto {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .imagen-auto img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .tarjeta-auto:hover .imagen-auto img {
+            transform: scale(1.1);
+        }
+
+        .info-auto {
+            padding: 1.5rem;
+        }
+
+        .info-auto h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--oscuro);
+        }
+
+        .info-auto .modelo {
+            color: var(--primario);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .tarjeta-auto.ferrari .modelo {
+            color: var(--rojo-ferrari);
+        }
+
+        .tarjeta-auto.shelby .modelo {
+            color: var(--azul-shelby);
+        }
+
+        .especificaciones {
+            display: flex;
+            justify-content: space-between;
+            margin: 1rem 0;
+        }
+
+        .item-especificacion {
+            text-align: center;
+        }
+
+        .item-especificacion .valor {
+            font-weight: 700;
+            color: var(--oscuro);
+            font-size: 1.1rem;
+        }
+
+        .item-especificacion .etiqueta {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .precio {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primario);
+            margin: 1rem 0;
+            text-align: right;
+        }
+
+        .tarjeta-auto.ferrari .precio {
+            color: var(--rojo-ferrari);
+        }
+
+        .tarjeta-auto.shelby .precio {
+            color: var(--azul-shelby);
+        }
+
+        
+        footer {
+            background-color: var(--oscuro);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .contenido-footer {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo-footer {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .enlaces-footer {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .enlaces-footer li {
+            margin: 0 1rem;
+        }
+
+        .enlaces-footer a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .enlaces-footer a:hover {
+            color: var(--primario);
+        }
+
+        .iconos-sociales {
+            margin: 1.5rem 0;
+        }
+
+        .iconos-sociales a {
+            color: white;
+            margin: 0 0.5rem;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .iconos-sociales a:hover {
+            color: var(--primario);
+        }
+
+        .derechos {
+            margin-top: 2rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .eslogan {
+                font-size: 1.2rem;
+            }
+            
+            .contenedor-nav {
+                flex-direction: column;
+            }
+            
+            .enlaces-nav {
+                margin-top: 1rem;
+            }
+            
+            .enlaces-nav li {
+                margin-left: 1rem;
+                margin-right: 1rem;
+            }
+            
+            .grid-modelos {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav id="barra-navegacion">
+        <div class="contenedor-nav">
+            <a href="#" class="logo">SHELBY MOTORS</a>
+            <ul class="enlaces-nav">
+                <li><a href="#lamborghini">Lamborghini</a></li>
+                <li><a href="#porsche">Porsche</a></li>
+                <li><a href="#corvette">Corvette</a></li>
+                <li><a href="#ferrari">Ferrari</a></li>
+                <li><a href="#ram">RAM</a></li>
+                <li><a href="#shelby">Shelby</a></li>
+            </ul>
+        </div>
+    </nav>
+
+ 
+    <header>
+        <div class="contenido-cabecera">
+            <h1>Shelby Motors</h1>
+            <p class="eslogan">Potencia, elegancia y rendimiento sin igual</p>
+            <a href="#lamborghini" class="boton">Explora los modelos</a>
+        </div>
+    </header>
+
+    
+    <section class="seccion-modelos">
+        <div class="titulo-seccion">
+            <h2>Nuestra Colección</h2>
+            <p>Descubre los autos más exclusivos y potentes</p>
+        </div>
+        <div class="contenedor-marca" id="lamborghini">
+            <div class="titulo-marca">
+                <h3>Lamborghini</h3>
+            </div>
+            <div class="grid-modelos">
+                <div class="tarjeta-auto">
+                    <div class="imagen-auto">
+                        <img src="https://www.digitaltrends.com/wp-content/uploads/2020/01/lamborghini_aventador_svj_roadster_1.jpg?resize=1200%2C720&p=1" alt="Lamborghini Aventador SVJ">
+                    </div>
+                    <div class="info-auto">
+                        <h3>Aventador SVJ</h3>
+                        <span class="modelo">Super Veloce Jota</span>
+                        <p>El epítome de la ingeniería Lamborghini, con aerodinámica extrema y performance de otro nivel.</p>
+                        <div class="especificaciones">
+                            <div class="item-especificacion">
+                                <div class="valor">759 HP</div>
+                                <div class="etiqueta">Potencia</div>
+                            </div>
+                            <div class="item-especificacion">
+                                <div class="valor">2.8s</div>
+                                <div class="etiqueta">0-100 km/h</div>
+                            </div>
+                            <div class="item-especificacion">
+                                <div class="valor">350 km/h</div>
+                                <div class="etiqueta">Vel. Máx.</div>
+                            </div>
+                        </div>
+                        <div class="precio">$517,770</div>
+                    </div>
+                </div>
+                <div class="tarjeta-auto">
+                    <div class="imagen-auto">
+                        <img src="https://cdn.motor1.com/images/mgl/mMMO1A/s1/novitec-lamborghini-huracan-sto.jpg" alt="Lamborghini STO">
+                    </div>
+                    <div class="info-auto">
+                        <h3>Huracán STO</h3>
+                        <span class="modelo">Super Trofeo Omologata</span>
+                        <p>Un auto de carreras para la calle, inspirado directamente en la tecnología de competición.</p>
+                        <div class="especificaciones">
+                            <div class="item-especificacion">
+                                <div class="valor">631 HP</div>
+                                <div class="etiqueta">Potencia</div>
+                            </div>
+                            <div class="item-especificacion">
+                                <div class="valor">3.0s</div>
+                                <div class="etiqueta">0-100 km/h</div>
+                            </div>
+                            <div class="item-especificacion">
+                                <div class="valor">310 km/h</div>
+                                <div class="etiqueta">Vel. Máx.</div>
+                            </div>
+                        </div>
+                        <div class="precio">$327,838</div>
+                    </div>
+                </div>
+
+                <div class="tarjeta-auto">
+                    <div class="imagen-auto">
+                        <img src="https://cdn3.focus.bg/autodata/i/lamborghini/veneno/veneno/large/b307184cd904b5108dc98b1fcc837a65.jpg" alt="Lamborghini Veneno">
+                    </div>
+                    <div class="info-auto">
+                        <h3>Veneno</h3>
+                        <span class="modelo">Super carro con edicion limitada creada</span>
+                        <p>Uno de los Lamborghini más exclusivos jamás creados, con solo 9 unidades producidas.</p>
+                        <div class="especificaciones">
+                            <div class="item-especificacion">
+                                <div class="valor">740 HP</div>
+                                <div class="etiqueta">Potencia</div>
+                            </div>
+                            <div class="item-especificacion">
+                                <div class="valor">2.8s</div>
+                                <div class="etiqueta">0-100 km/h</div>
+                            </div>
+                            <div class="item-especificacion">
+                                <div class="valor">355 km/h</div>
+                                <div class="etiqueta">Vel. Máx.</div>
+                            </div>
+                        </div>
+                        <div class="precio">$4,500,000</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="contenedor-marca" id="porsche">
+            <div class="titulo-marca">
+                <h3>Porsche</h3>
+            </div>
+            <div class="grid-modelos">
+                <div class="tarjeta-auto">
+                    <div class="imagen-auto">
+                        <img src="https://cdn.motor1.com/images/mgl/WVX01/s3/lanzamiento-porsche-911-gt3-rs.jpg" alt="Porsche 911 GT3 RS">
+                    </div>
+                    <div class="info-auto">
+                        <h3>911 GT3 RS</h3>
+                        <span class="modelo">Hermoso diseño</span>
+                        <p>La máxima expresión de un Porsche para pista que puedes conducir en la calle.</p>
+                        <div class="especificaciones">
+                            <div class="item-especificacion">
+                                <div class="valor">518 HP</div>
+                                <div class="etiqueta">Potencia</div>
+                            </div>
+                            <div class="item-especificacion">
+                                <div class="valor">3.2s</div>
+                                <div class="etiqueta">0-100 km/h</div>
+                            </div>
+                            <div class="item-especificacion">
+                                <div class="valor">312 km/h</div>
+                                <div class="etiqueta">Vel. Máx.</div>
+                            </div>
+                        </div>
+                        <div class="precio">$187,500</div>
+                    </div>
+                </div>
+
+             
+                <div class="tarjeta-auto">
+                    <div class="imagen-auto">
+                        <img src="https://cdn.prod.website-files.com/5b4a3b3971d099f78f362505/656b34e6ccc6cf029b28d724_2020-Porsche-911-Carrera-4S-Cabriolet-Guards-Red-WP0CB2A98LS263619_010.webp" alt="Porsche Carrera 4S">
+                    </div>
+                    <div class="info-auto">
+                        <h3>Carrera 4S</h3>
+                        <span class="modelo">Para manejar donde sea</span>
+                        <p>El equilibrio perfecto entre rendimiento y comodidad, con tracción en las cuatro ruedas.</p>
+                        <div class="especificaciones">
+                            <div class="item-especificacion">
+                                <div class="valor">443 HP</div>
+                                <div class="etiqueta">Potencia</div>
+                            </div>
+                            <div class="item-especificacion">
+                                <div class="valor">3.6s</div>
+                                <div class="etiqueta">0-100 km/h</div>
+                            </div>
+                            <div class="item-especificacion">
+                                <div class="valor">306 km/h</div>
+                                <div class="etiqueta">Vel. Máx.</div>
+                            </div>
+                        </div>
+                        <div class="precio">$120,600</div>
+                    </div>
+                </div>
+
+                <div class="tarjeta-auto">
+                    <div class="imagen-auto">
+                        <img src="https://newsroom.porsche.com/.imaging/mte/porsche-templating-theme/image_1290x726/dam/ES-PLA-local/2022/Vehiculos/El-nuevo-Porsche-911-Turbo-S-llega-Ecuador/PLA22_1125_fine.jpg/jcr:content/PLA22_1125_fine.jpg" alt="Porsche 911 Turbo S">
+                    </div>
+                    <div class="info-auto">
+                        <h3>911 Turbo S</h3>
+                        <span class="modelo">Ultimate Performance</span>
+                        <p>El 911 más potente y tecnológicamente avanzado, con aceleración demoledora.</p>
+                        <div class="especificaciones">
+                            <div class="item-especificacion">
+                                <div class="valor">640 HP</div>
+                                <div class="etiqueta">Potencia</div>
+                            </div>
+                            <div class="item-especificacion">
+                                <div class="valor">2.7s</div>
+                                <div class="etiqueta">0-100 km/h</div>
+                            </div>
+                            <div class="item-especificacion">
+                                <div class="valor">330 km/h</div>
+                                <div class="etiqueta">Vel. Máx.</div>
+                            </div>
+                        </div>
+                        <div class="precio">$203,500</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="contenedor-marca" id="corvette">
+            <div class="titulo-marca">
+                <h3>Corvette</h3>
+            </div>
+            <div class="grid-modelos">
+              
+                <div class="tarjeta-auto">
+                    <div class="imagen-auto">
+                        <img src="https://bringatrailer.com/wp-content/uploads/2023/07/2020_chevrolet_corvette-stingray_4er08016-21215.jpg" alt="Corvette C8 Stingray">
+                    </div>
+                    <div class="info-auto">
+                        <h3>C8 Stingray</h3>
+                        <span class="modelo">Motor revolucionario</span>
+                        <p>El primer Corvette con motor central, que redefine el rendimiento accesible.</p>
+                        <div class="especificaciones">
+                            <div class="item-especificacion">
+                                <div class="valor">495 HP</div>
+                                <div class="etiqueta">Potencia</div>
+                            </div>
+                            <div class="item-especificacion">
+                                <div class="valor">2.9s</div>
+                                <div class="etiqueta">0-100 km/h</div>
+                            </div>
+                            <div class="item-especificacion">
+                                <div class="valor">312 km/h</div>
+                                <div class="etiqueta">Vel. Máx.</div>
+                            </div>
+                        </div>
+                        <div class="precio">$59,995</div>
+                    </div>
+                </div>
+
+
+                <div class="tarjeta-auto">
+                    <div class="imagen-auto">
+                        <img src="https://www.corvetteblogger.com/images/content/2023/011923_29b.jpg" alt="Corvette C8 Z06">
+                    </div>
+                    <div class="info-auto">
+                        <h3>C8 Z06</h3>
+                        <span class="modelo">Motor de un mounstro</span>
+                        <p>El Corvette más radical jamás construido, con motor plano-crank V8 atmosférico.</p>
+                        <div class="especificaciones">
+                            <div class="item-especificacion">
+                                <div class="valor">670 HP</div>
+                                <div class="etiqueta">Potencia</div>
+                            </div>
+                            <div class="item-especificacion">
+                                <div class="valor">2.6s</div>
+                                <div class="etiqueta">0-100 km/h</div>
+                            </div>
+                            <div class="item-especificacion">
+                                <div class="valor">312 km/h</div>
+                                <div class="etiqueta">Vel. Máx.</div>
+                            </div>
+                        </div>
+                        <div class="precio">$106,395</div>
+                    </div>
+                </div>
+
+                
+                <div class="tarjeta-auto">
+                    <div class="imagen-auto">
+                        <img src="https://www.chevrolet.com/content/dam/chevrolet/na/us/english/index/upcoming-vehicles/2025-corvette-zr1/mov/01-images/2025-zr1-aero-01.jpg?imwidth=1200" alt="Corvette ZR1">
+                    </div>
+                    <div class="info-auto">
+                        <h3>ZR1</h3>
+                        <span class="modelo">Legenda con Supercargador</span>
+                        <p>El último y más potente Corvette de motor delantero, con alerón enorme y actitud agresiva.</p>
+                        <div class="especificaciones">
+                            <div class="item-especificacion">
+                                <div class="valor">755 HP</div>
+                                <div class="etiqueta">Potencia</div>
+                            </div>
+                            <div class="item-especificacion">
+                                <div class="valor">2.8s</div>
+                                <div class="etiqueta">0-100 km/h</div>
+                            </div>
+                            <div class="item-especificacion">
+                                <div class="valor">341 km/h</div>
+                                <div class="etiqueta">Vel. Máx.</div>
+                            </div>
+                        </div>
+                        <div class="precio">$122,995</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="contenedor-marca" id="ferrari">
+            <div class="titulo-marca ferrari">
+                <h3>Ferrari</h3>
+            </div>
+            <div class="grid-modelos">
+                
+                <div class="tarjeta-auto ferrari">
+                    <div class="imagen-auto">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/28/Ferrari_Purosangue_DSC_7778_%28bearb_Sp_2%29.jpg" alt="Ferrari Purosangue">
+                    </div>
+                    <div class="info-auto">
+                        <h3>Purosangue</h3>
+                        <span class="modelo">Primera SUV de ferrari</span>
+                        <p>El primer SUV de Ferrari, con un V12 atmosférico y líneas deportivas puras.</p>
+                        <div class="especificaciones">
+                            <div class="item-especificacion">
+                                <div class="valor">715 HP</div>
+                                <div class="etiqueta">Potencia</div>
+                            </div>
+                            <div class="item-especificacion">
+                                <div class="valor">3.3s</div>
+                                <div class="etiqueta">0-100 km/h</div>
+                            </div>
+                            <div class="item-especificacion">
+                                <div class="valor">310 km/h</div>
+                                <div class="etiqueta">Vel. Máx.</div>
+                            </div>
+                        </div>
+                        <div class="precio">$398,350</div>
+                    </div>
+                </div>
+
+                
+                <div class="tarjeta-auto ferrari">
+                    <div class="imagen-auto">
+                        <img src="https://hips.hearstapps.com/hmg-prod/images/2024-ferrari-sf90-xx-stradale-109-654a668fc71a3.jpg?crop=0.582xw:0.490xh;0.204xw,0.373xh&resize=1200:*" alt="Ferrari SF90 Stradale">
+                    </div>
+                    <div class="info-auto">
+                        <h3>SF90 Stradale</h3>
+                        <span class="modelo">Super Deportivo hibrido</span>
+                        <p>El Ferrari más potente de serie, con tecnología híbrida enchufable y performance extrema.</p>
+                        <div class="especificaciones">
+                            <div class="item-especificacion">
+                                <div class="valor">986 HP</div>
+                                <div class="etiqueta">Potencia</div>
+                            </div>
+                            <div class="item-especificacion">
+                                <div class="valor">2.5s</div>
+                                <div class="etiqueta">0-100 km/h</div>
+                            </div>
+                            <div class="item-especificacion">
+                                <div class="valor">340 km/h</div>
+                                <div class="etiqueta">Vel. Máx.</div>
+                            </div>
+                        </div>
+                        <div class="precio">$625,000</div>
+                    </div>
+                </div>
+
+                <div class="tarjeta-auto ferrari">
+                    <div class="imagen-auto">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGDEp10NjPHNxeZYZL1aMg7-5l1RjJ6qD4mw&s" alt="Ferrari 812 Superfast">
+                    </div>
+                    <div class="info-auto">
+                        <h3>812 Superfast</h3>
+                        <span class="modelo">Con Su Gran Motor V12</span>
+                        <p>El último gran turismo V12 de Ferrari, con diseño agresivo y performance brutal.</p>
+                        <div class="especificaciones">
+                            <div class="item-especificacion">
+                                <div class="valor">789 HP</div>
+                                <div class="etiqueta">Potencia</div>
+                            </div>
+                            <div class="item-especificacion">
+                                <div class="valor">2.9s</div>
+                                <div class="etiqueta">0-100 km/h</div>
+                            </div>
+                            <div class="item-especificacion">
+                                <div class="valor">340 km/h</div>
+                                <div class="etiqueta">Vel. Máx.</div>
+                            </div>
+                        </div>
+                        <div class="precio">$335,000</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="contenedor-marca" id="ram">
+            <div class="titulo-marca">
+                <h3>RAM</h3>
+            </div>
+            <div class="grid-modelos">
+                
+                <div class="tarjeta-auto">
+                    <div class="imagen-auto">
+                        <img src="https://img.asmedia.epimg.net/resizer/v2/XRHYRL5EWBLY5L5G2KW6UA36XI.jpg?auth=801bc4c98437cbdfaf422485d9981e9af29b4905b3d66e76cebcd509928dfad3&width=360&height=203&smart=true" alt="RAM TRX">
+                    </div>
+                    <div class="info-auto">
+                        <h3>TRX</h3>
+                        <span class="modelo">Camioneta con motor HELLCAT</span>
+                        <p>La pickup más potente del mundo, con el corazón de un Hellcat y capacidad off-road extrema.</p>
+                        <div class="especificaciones">
+                            <div class="item-especificacion">
+                                <div class="valor">702 HP</div>
+                                <div class="etiqueta">Potencia</div>
+                            </div>
+                            <div class="item-especificacion">
+                                <div class="valor">4.5s</div>
+                                <div class="etiqueta">0-100 km/h</div>
+                            </div>
+                            <div class="item-especificacion">
+                                <div class="valor">190 km/h</div>
+                                <div class="etiqueta">Vel. Máx.</div>
+                            </div>
+                        </div>
+                        <div class="precio">$69,995</div>
+                    </div>
+                </div>
+
+                
+                <div class="tarjeta-auto">
+                    <div class="imagen-auto">
+                        <img src="https://acnews.blob.core.windows.net/imgnews/medium/NAZ_803d87b900b348298f686415d7cac32a.webp" alt="RAM TRX Mammoth 1200">
+                    </div>
+                    <div class="info-auto">
+                        <h3>Mammoth TRX</h3>
+                        <span class="modelo">Hecha por Hennessey</span>
+                        <p>La versión modificada por Hennessey del TRX, con supercargador mejorado y 1,200 caballos.</p>
+                        <div class="especificaciones">
+                            <div class="item-especificacion">
+                                <div class="valor">1,200 HP</div>
+                                <div class="etiqueta">Potencia</div>
+                            </div>
+                            <div class="item-especificacion">
+                                <div class="valor">3.2s</div>
+                                <div class="etiqueta">0-100 km/h</div>
+                            </div>
+                            <div class="item-especificacion">
+                                <div class="valor">225 km/h</div>
+                                <div class="etiqueta">Vel. Máx.</div>
+                            </div>
+                        </div>
+                        <div class="precio">$135,350</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="contenedor-marca" id="shelby">
+            <div class="titulo-marca shelby">
+                <h3>Shelby</h3>
+            </div>
+            <div class="grid-modelos">
+                <div class="tarjeta-auto shelby">
+                    <div class="imagen-auto">
+                        <img src="https://i.blogs.es/473795/ford-mustang-shelby-gt500-mexico_/1366_2000.jpg" alt="Shelby GT500">
+                    </div>
+                    <div class="info-auto">
+                        <h3>GT500</h3>
+                        <span class="modelo">El Mustang más potente</span>
+                        <p>La bestia definitiva de Shelby, con supercargador y performance de superdeportivo.</p>
+                        <div class="especificaciones">
+                            <div class="item-especificacion">
+                                <div class="valor">760 HP</div>
+                                <div class="etiqueta">Potencia</div>
+                            </div>
+                            <div class="item-especificacion">
+                                <div class="valor">3.3s</div>
+                                <div class="etiqueta">0-100 km/h</div>
+                            </div>
+                            <div class="item-especificacion">
+                                <div class="valor">290 km/h</div>
+                                <div class="etiqueta">Vel. Máx.</div>
+                            </div>
+                        </div>
+                        <div class="precio">$73,995</div>
+                    </div>
+                </div>
+
+                <div class="tarjeta-auto shelby">
+                    <div class="imagen-auto">
+                        <img src="https://cdn.motor1.com/images/mgl/0xg3n/s1/2019-ford-mustang-shelby-gt350.webp" alt="Shelby GT350">
+                    </div>
+                    <div class="info-auto">
+                        <h3>GT350</h3>
+                        <span class="modelo">Pura esencia de Shelby</span>
+                        <p>El GT350 combina el equilibrio perfecto entre pista y calle con su V8 atmosférico de altas revoluciones.</p>
+                        <div class="especificaciones">
+                            <div class="item-especificacion">
+                                <div class="valor">526 HP</div>
+                                <div class="etiqueta">Potencia</div>
+                            </div>
+                            <div class="item-especificacion">
+                                <div class="valor">4.0s</div>
+                                <div class="etiqueta">0-100 km/h</div>
+                            </div>
+                            <div class="item-especificacion">
+                                <div class="valor">290 km/h</div>
+                                <div class="etiqueta">Vel. Máx.</div>
+                            </div>
+                        </div>
+                        <div class="precio">$61,635</div>
+                    </div>
+                </div>
+
+                <div class="tarjeta-auto shelby">
+                    <div class="imagen-auto">
+                        <img src="https://i.pinimg.com/736x/2a/06/50/2a0650b6abc53d169e953b2641393ec3.jpg" alt="Mustang GT">
+                    </div>
+                    <div class="info-auto">
+                        <h3>Mustang GT</h3>
+                        <span class="modelo">Leyenda americana</span>
+                        <p>El icónico muscle car con un rugiente V8 5.0L Coyote y diseño agresivo.</p>
+                        <div class="especificaciones">
+                            <div class="item-especificacion">
+                                <div class="valor">450 HP</div>
+                                <div class="etiqueta">Potencia</div>
+                            </div>
+                            <div class="item-especificacion">
+                                <div class="valor">4.2s</div>
+                                <div class="etiqueta">0-100 km/h</div>
+                            </div>
+                            <div class="item-especificacion">
+                                <div class="valor">250 km/h</div>
+                                <div class="etiqueta">Vel. Máx.</div>
+                            </div>
+                        </div>
+                        <div class="precio">$43,180</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <footer>
+        <div class="contenido-footer">
+            <div class="logo-footer">SHELBY MOTORS</div>
+            <ul class="enlaces-footer">
+                <li><a href="#lamborghini">Lamborghini</a></li>
+                <li><a href="#porsche">Porsche</a></li>
+                <li><a href="#corvette">Corvette</a></li>
+                <li><a href="#ferrari">Ferrari</a></li>
+                <li><a href="#ram">RAM</a></li>
+                <li><a href="#shelby">Shelby</a></li>
+            </ul>
+            <div class="derechos">
+                &copy; 2025 Shelby Motors. Todos los derechos reservados. Pagina hecha por Kevin Ramos.
+            </div>
+        </div>
+    </footer>
+
+   
+    <script>
+        window.addEventListener('scroll', function() {
+            const barraNavegacion = document.getElementById('barra-navegacion');
+            if (window.scrollY > 50) {
+                barraNavegacion.classList.add('desplazado');
+            } else {
+                barraNavegacion.classList.remove('desplazado');
+            }
+        });
+    </script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>
